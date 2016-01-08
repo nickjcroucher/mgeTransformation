@@ -1,0 +1,19 @@
+#ifndef PARAMETERS_H
+#define PARAMETERS_H
+
+//////
+
+#define NO_COMPARTMENTS 86
+#define NO_S1_COMPARTMENTS 32
+#define NO_S2_COMPARTMENTS 32
+#define NO_D_COMPARTMENTS 16
+#define NO_M_COMPARTMENTS 4
+#define NO_R_COMPARTMENTS 2
+#define DTIME 0.001
+#define DTIME_OUT 1
+#define MAX_CELLS 1250000
+#define MAX_MOLS 160
+
+//////
+
+#endif
