@@ -18,6 +18,19 @@ extern gsl_rng * rgen;
 
 using namespace std;
 
+int switching (int *y, double switching_rate1, double switching_rate2) {
+    
+    for (int c = 0; c < 32; c++) {
+        int s1_to_s2 = gsl_ran_binomial(rgen, DTIME*switching_rate1, y[c]);
+        int s2_to_s1 = gsl_ran_binomial(rgen, DTIME*switching_rate2, y[c+32]);
+        y[c] = y[c] + s2_to_s1 - s1_to_s2;
+        y[c+32] = y[c+32] - s2_to_s1 + s1_to_s2;
+    }
+    
+    return 0;
+}
+
+
 int timeStep (int *y, int *x, int **bindingVec, bool *currentlyUnbound, strainParms *params, int noSteps, int writeOutFreq, ofstream &outfile) {
 
     // set up counters for output
@@ -4179,6 +4192,17 @@ int timeStep (int *y, int *x, int **bindingVec, bool *currentlyUnbound, strainPa
             }
         }
         
+        /*****************************
+         * Switching between X and Y *
+         *****************************/
+        
+        int switchCheck = 1;
+        switchCheck = switching(y,parms.switching1,parms.switching2);
+        if (switchCheck != 0) {
+            std::cerr << "Unable to switch between X and Y states" << std::endl;
+            exit(14);
+        }
+        
         // increment counters and print to output file
         stepCounter++;
         time += DTIME;
@@ -4194,3 +4218,4 @@ int timeStep (int *y, int *x, int **bindingVec, bool *currentlyUnbound, strainPa
 	return 0;
 	
 }
+

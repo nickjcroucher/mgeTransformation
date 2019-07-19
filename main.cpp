@@ -185,6 +185,10 @@ int main(int argc, char *argv[]) {
 	    		parms.xfit = ::atof(b.c_str());
 	    	} else if (a == "yfit") {
 	    		parms.yfit = ::atof(b.c_str());
+            } else if (a == "switching1") {
+                parms.switching1 = ::atof(b.c_str());
+            } else if (a == "switching2") {
+                parms.switching2 = ::atof(b.c_str());
 	    	} else if (a == "interstrainTransformation") {
 	    		parms.interstrainTransformation = ::atof(b.c_str());
 	    	} else if (a == "interstrainMGE") {

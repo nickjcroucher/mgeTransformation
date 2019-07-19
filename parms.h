@@ -71,6 +71,8 @@ struct strainParms {
     // non-MGE locus
     double xfit;
     double yfit;
+    double switching1;
+    double switching2;
         
 	// environmental parameters
 	double deltaX;
