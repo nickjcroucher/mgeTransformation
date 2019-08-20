@@ -30,6 +30,6 @@ void dnaAsymmetry (double, double, int, int, int, int, int, int, int, int, int *
 
 int dnaBinding (int, double, double, double, double, double, int *c, int *a);
 
-int mgeAbsorption(int, double, double, double, int *c, int *m);
+int mgeAbsorption(int, double, double, double, int *c, int *m, int rms);
 
 #endif // FUNCTIONS_H

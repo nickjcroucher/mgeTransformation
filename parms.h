@@ -84,6 +84,7 @@ struct strainParms {
 	double interstrainR;
 	double interstrainCompetition;
 	double interstrainKill;
+    int rms;
     
     // explicit phage bias
     int phageFirst;

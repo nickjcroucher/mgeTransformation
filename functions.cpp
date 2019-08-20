@@ -402,7 +402,7 @@ int dnaBinding (int dna, double p1, double p2, double p3, double p4, double d1, 
 	return 0;
 }
 
-int mgeAbsorption(int M, double c1, double c2, double d1, int *c, int *m) {
+int mgeAbsorption(int M, double c1, double c2, double d1, int *c, int *m, int rms) {
 	
 	// initialise output array
 	for (int i = 0; i < 65; i++) {
@@ -426,7 +426,13 @@ int mgeAbsorption(int M, double c1, double c2, double d1, int *c, int *m) {
     
 	// MGE binding probabilities
 	double pS1 = c1*tots1;
-	double pS2 = c2*tots2;
+    double pS2 = 0.0;
+    if (rms == 1) {
+        pS2 = c1*tots2; // if RMS blocking, then absorption unaffected
+    } else {
+        pS2 = c2*tots2; // otherwise assume lower MGE binding
+    }
+    
 	double dProb = d1;
 	
 	double bindDegProbProduct = pS1+pS2+dProb;
@@ -448,7 +454,7 @@ int mgeAbsorption(int M, double c1, double c2, double d1, int *c, int *m) {
     for (int i = NO_S1_COMPARTMENTS; i < (NO_S1_COMPARTMENTS+NO_S2_COMPARTMENTS); ++i) {
         if (bindDegProbProduct > 0 && c[i] > 0) {
             m[i] = gsl_ran_binomial(rgen, double(c2*c[i])/bindDegProbProduct, totalBound);
-            bindDegProbProduct-=double(c2*c[i]);
+            bindDegProbProduct-=double(c2*c[i]); // independent of mechanism, still expect lower infection rate
             totalBound-=m[i];
         }
     }

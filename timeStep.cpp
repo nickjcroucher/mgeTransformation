@@ -207,7 +207,7 @@ int timeStep (int *y, int *x, int **bindingVec, bool *currentlyUnbound, strainPa
         
         // MGE M1S1
         int abCheck = 1;
-        abCheck = mgeAbsorption(x[mgeIndex], parms.beta1, parms.beta1*parms.interstrainMGE, parms.deltaM1, cells, m);
+        abCheck = mgeAbsorption(x[mgeIndex], parms.beta1, parms.beta1*parms.interstrainMGE, parms.deltaM1, cells, m, parms.rms);
         if (abCheck != 0) {
             cerr << "Error with MGE absorption subroutine for M1S1" << endl;
             return 1;
@@ -219,7 +219,7 @@ int timeStep (int *y, int *x, int **bindingVec, bool *currentlyUnbound, strainPa
         // MGE M1S2
         abCheck = 1;
         ++mgeIndex;
-        abCheck = mgeAbsorption(x[mgeIndex], parms.beta1*parms.interstrainMGE, parms.beta1, parms.deltaM1, cells, m);
+        abCheck = mgeAbsorption(x[mgeIndex], parms.beta1*parms.interstrainMGE, parms.beta1, parms.deltaM1, cells, m, parms.rms);
         if (abCheck != 0) {
             cerr << "Error with MGE absorption subroutine M2S1" << endl;
             return 1;
@@ -231,7 +231,7 @@ int timeStep (int *y, int *x, int **bindingVec, bool *currentlyUnbound, strainPa
         // MGE M2S1
         abCheck = 1;
         ++mgeIndex;
-        abCheck = mgeAbsorption(x[mgeIndex], parms.beta2, parms.beta2*parms.interstrainMGE, parms.deltaM2, cells, m);
+        abCheck = mgeAbsorption(x[mgeIndex], parms.beta2, parms.beta2*parms.interstrainMGE, parms.deltaM2, cells, m, parms.rms);
         if (abCheck != 0) {
             cerr << "Error with MGE absorption subroutine M2S1" << endl;
             return 1;
@@ -243,7 +243,7 @@ int timeStep (int *y, int *x, int **bindingVec, bool *currentlyUnbound, strainPa
         // MGE M2S2
         abCheck = 1;
         ++mgeIndex;
-        abCheck = mgeAbsorption(x[mgeIndex], parms.beta2*parms.interstrainMGE, parms.beta2, parms.deltaM2, cells, m);
+        abCheck = mgeAbsorption(x[mgeIndex], parms.beta2*parms.interstrainMGE, parms.beta2, parms.deltaM2, cells, m, parms.rms);
         if (abCheck != 0) {
             cerr << "Error with MGE absorption subroutine M2S2" << endl;
             return 1;

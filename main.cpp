@@ -55,6 +55,10 @@ int main(int argc, char *argv[]) {
         y[i] = 0;
     }
     
+    // set default interstrain MGE barrier to
+    // represent deviation in receptor binding
+    parms.rms = 0;
+    
     /*********************
     * Check command line *
     *********************/ 
@@ -189,6 +193,8 @@ int main(int argc, char *argv[]) {
                 parms.switching1 = ::atof(b.c_str());
             } else if (a == "switching2") {
                 parms.switching2 = ::atof(b.c_str());
+            } else if (a == "switching2") {
+                parms.rms = strtol(b.c_str(),NULL,0);
 	    	} else if (a == "interstrainTransformation") {
 	    		parms.interstrainTransformation = ::atof(b.c_str());
 	    	} else if (a == "interstrainMGE") {
